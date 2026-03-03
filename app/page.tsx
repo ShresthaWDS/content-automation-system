@@ -25,13 +25,23 @@ export default function Home() {
   });
 
   const handleSave = (task: Task) => {
+    let canSave = true;
     setTasks((prev) => {
+      const duplicateTask = prev.find(
+        (t) => t.id !== task.id && t.header === task.header && t.body === task.body
+      );
+      if (duplicateTask) {
+        canSave = false;
+        return prev;
+      }
+
       const exists = prev.find((t) => t.id === task.id);
       if (exists) {
         return prev.map((t) => (t.id === task.id ? task : t));
       }
       return [...prev, task];
     });
+    return canSave;
   };
 
   const handleDelete = () => {

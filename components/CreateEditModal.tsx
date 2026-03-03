@@ -6,7 +6,7 @@ import { Task } from "@/types/task";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (task: Task) => void;
+  onSave: (task: Task) => boolean;
   existingTask?: Task | null;
 }
 
@@ -18,6 +18,7 @@ export default function CreateEditModal({
 }: Props) {
   const [header, setHeader] = useState("");
   const [body, setBody] = useState("");
+  const [saveError, setSaveError] = useState("");
   const isInvalid = !header.trim() || !body.trim();
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function CreateEditModal({
       setHeader("");
       setBody("");
     }
+    setSaveError("");
   }, [isOpen, existingTask]);
 
   if (!isOpen) return null;
@@ -44,7 +46,12 @@ export default function CreateEditModal({
       createdAt: new Date().toISOString(),
     };
 
-    onSave(newTask);
+    const saved = onSave(newTask);
+    if (!saved) {
+      setSaveError("This content already exists!");
+      return;
+    }
+
     onClose();
   };
 
@@ -70,6 +77,7 @@ export default function CreateEditModal({
           required
           onChange={(e) => setBody(e.target.value)}
         />
+        {saveError && <p className="text-red-400 text-sm mt-2">{saveError}</p>}
 
         <div className="flex justify-end gap-3 mt-4">
           <button
