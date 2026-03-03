@@ -71,7 +71,13 @@ export default function CreateEditModal({
           onChange={(e) => setBody(e.target.value)}
         />
 
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end gap-3 mt-4">
+          <button
+            onClick={onClose}
+            className="bg-zinc-700 px-4 py-2 rounded-lg hover:bg-zinc-600 transition"
+          >
+            Back
+          </button>
           <button
             onClick={handleSave}
             disabled={isInvalid}
