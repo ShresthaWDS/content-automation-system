@@ -18,6 +18,7 @@ export default function CreateEditModal({
 }: Props) {
   const [header, setHeader] = useState("");
   const [body, setBody] = useState("");
+  const isInvalid = !header.trim() || !body.trim();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -34,10 +35,12 @@ export default function CreateEditModal({
   if (!isOpen) return null;
 
   const handleSave = () => {
+    if (isInvalid) return;
+
     const newTask: Task = {
       id: existingTask?.id || crypto.randomUUID(),
-      header,
-      body,
+      header: header.trim(),
+      body: body.trim(),
       createdAt: new Date().toISOString(),
     };
 
@@ -56,6 +59,7 @@ export default function CreateEditModal({
           className="w-full bg-zinc-800 px-4 py-2 rounded-lg mb-4"
           placeholder="Header"
           value={header}
+          required
           onChange={(e) => setHeader(e.target.value)}
         />
 
@@ -63,13 +67,15 @@ export default function CreateEditModal({
           className="w-full bg-zinc-800 px-4 py-2 rounded-lg h-32"
           placeholder="Body"
           value={body}
+          required
           onChange={(e) => setBody(e.target.value)}
         />
 
         <div className="flex justify-end mt-4">
           <button
             onClick={handleSave}
-            className="bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+            disabled={isInvalid}
+            className="bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Save
           </button>
