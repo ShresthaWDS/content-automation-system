@@ -6,6 +6,7 @@ import TaskCard from "@/components/TaskCard";
 import CreateEditModal from "@/components/CreateEditModal";
 import DeleteConfirmModal from "@/components/DeleteConfirmModal";
 import { Task } from "@/types/task";
+import { UserProfile } from "@/types/user";
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -13,6 +14,12 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const currentUser: UserProfile = {
+    fullName: "Shrestha Kundu",
+    username: "shrestha3103",
+    email: "shrestha.kundu@wizcondigital.com",
+    avatarUrl: null,
+  };
 
   const filteredTasks = tasks.filter((task) => {
     const query = searchTerm.trim().toLowerCase();
@@ -51,7 +58,11 @@ export default function Home() {
 
   return (
     <>
-      <Navbar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <Navbar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        user={currentUser}
+      />
 
       <div className="p-8 max-w-4xl mx-auto">
         <div className="flex justify-between mb-6">

@@ -57,7 +57,7 @@ export default function CreateEditModal({
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center backdrop-blur-sm">
-      <div className="bg-zinc-900 w-[500px] rounded-xl p-6 shadow-xl border border-zinc-800">
+      <div className="bg-zinc-900 w-[700px] rounded-xl p-6 shadow-xl border border-zinc-800">
         <h2 className="text-lg font-semibold mb-4">
           {existingTask ? "Edit Content" : "Create New Content"}
         </h2>
