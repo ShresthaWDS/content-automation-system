@@ -49,7 +49,7 @@ export default function CreateEditModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center backdrop-blur-sm">
       <div className="bg-zinc-900 w-[500px] rounded-xl p-6 shadow-xl border border-zinc-800">
         <h2 className="text-lg font-semibold mb-4">
           {existingTask ? "Edit Content" : "Create New Content"}
@@ -81,7 +81,7 @@ export default function CreateEditModal({
           <button
             onClick={handleSave}
             disabled={isInvalid}
-            className="bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-sky-700 px-4 py-2 rounded-lg hover:bg-sky-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Save
           </button>

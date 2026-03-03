@@ -9,9 +9,20 @@ import { Task } from "@/types/task";
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  const filteredTasks = tasks.filter((task) => {
+    const query = searchTerm.trim().toLowerCase();
+    if (!query) return true;
+
+    return (
+      task.header.toLowerCase().includes(query) ||
+      task.body.toLowerCase().includes(query)
+    );
+  });
 
   const handleSave = (task: Task) => {
     setTasks((prev) => {
@@ -30,7 +41,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      <Navbar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
 
       <div className="p-8 max-w-4xl mx-auto">
         <div className="flex justify-between mb-6">
@@ -41,14 +52,14 @@ export default function Home() {
               setEditingTask(null);
               setIsModalOpen(true);
             }}
-            className="bg-sky-700 px-4 py-2 rounded-lg hover:bg-indigo-700"
+            className="bg-sky-700 px-4 py-2 rounded-lg hover:bg-sky-800"
           >
             Create New Content
           </button>
         </div>
 
         <div className="space-y-4">
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <TaskCard
               key={task.id}
               task={task}

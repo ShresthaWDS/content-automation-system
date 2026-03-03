@@ -14,7 +14,7 @@ export default function DeleteConfirmModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center backdrop-blur-sm">
       <div className="bg-zinc-900 w-[400px] rounded-xl p-6 border border-zinc-800">
         <h2 className="text-lg font-semibold mb-4">
           Are you sure you want to delete this?

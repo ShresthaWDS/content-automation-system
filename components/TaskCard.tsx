@@ -15,7 +15,7 @@ const handleGenerateText = (task: Task) => {
 
 export default function TaskCard({ task, onEdit, onDelete }: Props) {
     return (
-        <div className="bg-zinc-900 border border-zinc-800 p-5 rounded-xl hover:border-indigo-500 transition">
+        <div className="bg-zinc-900 border border-zinc-800 p-5 rounded-xl hover:border-sky-600 transition">
             <h3 className="text-lg font-semibold">{task.header}</h3>
             <p className="text-zinc-400 mt-2">{task.body}</p>
 
