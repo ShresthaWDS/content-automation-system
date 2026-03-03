@@ -20,6 +20,8 @@ export default function CreateEditModal({
   const [body, setBody] = useState("");
 
   useEffect(() => {
+    if (!isOpen) return;
+
     if (existingTask) {
       setHeader(existingTask.header);
       setBody(existingTask.body);
@@ -27,7 +29,7 @@ export default function CreateEditModal({
       setHeader("");
       setBody("");
     }
-  }, [existingTask]);
+  }, [isOpen, existingTask]);
 
   if (!isOpen) return null;
 
