@@ -41,7 +41,7 @@ export default function Home() {
               setEditingTask(null);
               setIsModalOpen(true);
             }}
-            className="bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700"
+            className="bg-sky-700 px-4 py-2 rounded-lg hover:bg-indigo-700"
           >
             Create New Content
           </button>
